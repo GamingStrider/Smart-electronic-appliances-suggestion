@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Electronics | Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .category-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+        .filter-group {
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-bolt"></i> Smart Gadgets Finder
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="display-5 text-center mb-4">Find the Best Electronics for You</h1>
+
+        <div class="card p-4 shadow-lg mb-5">
+            <form id="search-form" action="{{ url_for('search_products') }}" method="GET" class="d-flex">
+                <input type="search" id="search-query" name="query" class="form-control form-control-lg me-2" placeholder="Search for iPhone, Dell laptop, 50MP camera, etc.">
+                
+                <button type="button" class="btn btn-outline-secondary btn-lg me-2" data-bs-toggle="modal" data-bs-target="#filterModal">
+                    <i class="fas fa-filter"></i> Filter
+                </button>
+                
+                <button type="submit" class="btn btn-primary btn-lg">Search</button>
+            </form>
+        </div>
+
+        <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-light">
+                        <h5 class="modal-title" id="filterModalLabel"><i class="fas fa-sliders-h"></i> Advanced Filters</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="filter-form" action="{{ url_for('search_products') }}" method="GET">
+                        <div class="modal-body row g-3">
+                            <input type="hidden" name="query" value="" id="modal-query-sync">
+
+                            <div class="col-md-12 mb-4">
+                                <label class="form-label fw-bold text-danger fs-5">1. Select Primary Category</label>
+                                <div class="filter-group border-danger p-3">
+                                    {% for cat in categories %}
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="category" value="{{ cat }}" id="cat-{{ cat }}">
+                                        <label class="form-check-label text-capitalize" for="cat-{{ cat }}">{{ cat }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Brand</label>
+                                <div class="filter-group">
+                                    {% for brand in brands %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="brand" value="{{ brand }}" id="brand-{{ loop.index }}">
+                                        <label class="form-check-label" for="brand-{{ loop.index }}">{{ brand }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Price Range</label>
+                                <div class="filter-group">
+                                    {% for key, label in price_ranges.items() %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="price_range" value="{{ key }}" id="price-{{ loop.index }}">
+                                        <label class="form-check-label" for="price-{{ loop.index }}">{{ label }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Processor (Mobile/Laptop)</label>
+                                <div class="filter-group">
+                                    {% for proc in processors %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="processor" value="{{ proc }}" id="proc-{{ loop.index }}">
+                                        <label class="form-check-label" for="proc-{{ loop.index }}">{{ proc }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Storage (RAM/SSD)</label>
+                                <div class="filter-group">
+                                    {% for option in storage_options %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="storage" value="{{ option }}" id="storage-{{ loop.index }}">
+                                        <label class="form-check-label" for="storage-{{ loop.index }}">{{ option }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Camera (Mobile only)</label>
+                                <div class="filter-group">
+                                    {% for cam in cameras %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="camera" value="{{ cam }}" id="cam-{{ loop.index }}">
+                                        <label class="form-check-label" for="cam-{{ loop.index }}">{{ cam }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Battery (Mobile only)</label>
+                                <div class="filter-group">
+                                    {% for batt in batteries %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="battery" value="{{ batt }}" id="batt-{{ loop.index }}">
+                                        <label class="form-check-label" for="batt-{{ loop.index }}">{{ batt }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Apply Filters & Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="mb-3 text-secondary">Browse by Category</h2>
+        <div class="row g-4 mb-5">
+            {% for cat in categories %}
+            <div class="col-md-3 col-sm-6">
+                <a href="{{ url_for('search_products', query=cat) }}" class="card text-center category-card h-100 shadow-sm text-decoration-none border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title text-capitalize text-primary">{{ cat }}</h5>
+                        <p class="card-text text-muted small">View all top {{ cat }} products.</p>
+                        <span style="font-size: 2rem;">
+                            {% if cat == 'mobile' %}📱{% elif cat == 'laptop' %}💻{% elif cat == 'tv' %}📺{% else %}🎧{% endif %}
+                        </span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <footer class="bg-dark text-white text-center text-lg-start mt-5">
+        <div class="text-center p-3">
+          &copy; 2024 Smart Electronics Suggestion | BTech CSE Mini-Project
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+    
+    <script>
+        document.getElementById('filterModal').addEventListener('show.bs.modal', function() {
+            // When the modal opens, sync the search query from the main bar
+            const mainQuery = document.getElementById('search-query').value;
+            document.getElementById('modal-query-sync').value = mainQuery;
+        });
+
+        function clearFilters() {
+            document.querySelectorAll('#filter-form input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            document.querySelectorAll('#filter-form input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+        }
+    </script>
+</body>
+</html>

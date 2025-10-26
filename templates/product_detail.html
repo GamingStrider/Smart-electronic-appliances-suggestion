@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} | Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .detail-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: contain;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .spec-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .spec-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        .spec-list li strong {
+            display: inline-block;
+            width: 120px;
+            color: #343a40;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-bolt"></i> Smart Gadgets Finder
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <a href="javascript:history.back()" class="btn btn-outline-primary mb-4">← Back to Results</a>
+        
+        <div class="row mb-5">
+            <div class="col-md-5">
+                <img src="{{ url_for('static', filename=product.image) }}" class="detail-image shadow-sm" alt="{{ product.name }}">
+            </div>
+            <div class="col-md-7">
+                <h1 class="display-4 mb-2">{{ product.name }}</h1>
+                <p class="text-muted fs-5 mb-3">{{ product.brand }} | <span class="text-capitalize">{{ product.category }}</span></p>
+
+                <h2 class="text-success display-5 fw-bold mb-4">₹{{ "{:,.0f}".format(product.price) }}</h2>
+                
+                <div class="mb-4">
+                    <span class="text-warning fs-4 me-3">{{ product.rating }} ★ Rating</span>
+                    <span class="badge bg-success fs-6">{{ 'In Stock' if product.stock else 'Out of Stock' }}</span>
+                </div>
+
+                <h3>Full Specifications</h3>
+                <ul class="spec-list">
+                    <li><strong>Processor:</strong> {{ product.processor }}</li>
+                    {% if product.camera and product.camera != 'None' %}
+                    <li><strong>Camera:</strong> {{ product.camera }}</li>
+                    {% endif %}
+                    {% if product.battery and product.battery != 'N/A' %}
+                    <li><strong>Battery:</strong> {{ product.battery }}</li>
+                    {% endif %}
+                    <li><strong>ID:</strong> #{{ product.id }}</li>
+                </ul>
+
+                <a href="#" class="btn btn-success btn-lg mt-4 shadow-sm" onclick="alert('Simulated Buy Now for {{ product.name }}!')">
+                    <i class="fas fa-shopping-cart"></i> Buy Now (Dummy Link)
+                </a>
+            </div>
+        </div>
+        
+        <hr class="my-5">
+
+        {% if recommendations %}
+        <h2 class="mb-4 text-info">You Might Also Like...</h2>
+        <div class="row g-4 mb-5">
+            {% for rec in recommendations %}
+            <div class="col-lg-3 col-md-6">
+                <a href="{{ url_for('product_detail', product_id=rec.id) }}" class="card h-100 shadow-sm text-decoration-none">
+                    <div class="card-body">
+                        <h5 class="card-title text-truncate text-info">{{ rec.name }}</h5>
+                        <p class="text-muted small mb-1">{{ rec.brand }}</p>
+                        <p class="lead fw-bold text-success">₹{{ "{:,.0f}".format(rec.price) }}</p>
+                        <span class="text-warning fw-bold">{{ rec.rating }} ★</span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+
+    <footer class="bg-dark text-white text-center text-lg-start mt-5">
+        <div class="text-center p-3">
+          &copy; 2024 Smart Electronics Suggestion | BTech CSE Mini-Project
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+</body>
+</html>

@@ -1,0 +1,33 @@
+/* Custom styles for Smart Electronics Website */
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Enhancing the Navbar */
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Filter Group Styling */
+.filter-group {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Custom Checkbox Colors */
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* Footer Styling */
+footer {
+    min-height: 80px;
+    padding-top: 20px;
+}
