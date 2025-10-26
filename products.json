@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "name": "Samsung Galaxy S23 Ultra",
+    "category": "mobiles",
+    "brand": "Samsung",
+    "price": 89999,
+    "rating": 4.8,
+    "description": "Flagship smartphone with 200MP camera and S Pen",
+    "image": "https://via.placeholder.com/300x200?text=Galaxy+S23+Ultra"
+  },
+  {
+    "id": 2,
+    "name": "iPhone 15 Pro Max",
+    "category": "mobiles",
+    "brand": "Apple",
+    "price": 134900,
+    "rating": 4.9,
+    "description": "Premium iPhone with titanium design and A17 Pro chip",
+    "image": "https://via.placeholder.com/300x200?text=iPhone+15+Pro"
+  },
+  {
+    "id": 3,
+    "name": "OnePlus 12",
+    "category": "mobiles",
+    "brand": "OnePlus",
+    "price": 64999,
+    "rating": 4.6,
+    "description": "Flagship killer with Snapdragon 8 Gen 3",
+    "image": "https://via.placeholder.com/300x200?text=OnePlus+12"
+  },
+  {
+    "id": 4,
+    "name": "Google Pixel 8 Pro",
+    "category": "mobiles",
+    "brand": "Google",
+    "price": 84999,
+    "rating": 4.7,
+    "description": "AI-powered camera phone with Tensor G3 chip",
+    "image": "https://via.placeholder.com/300x200?text=Pixel+8+Pro"
+  },
+  {
+    "id": 5,
+    "name": "Xiaomi 14 Pro",
+    "category": "mobiles",
+    "brand": "Xiaomi",
+    "price": 54999,
+    "rating": 4.5,
+    "description": "Value flagship with Leica cameras",
+    "image": "https://via.placeholder.com/300x200?text=Xiaomi+14+Pro"
+  },
+  {
+    "id": 6,
+    "name": "MacBook Pro 14 M3",
+    "category": "laptops",
+    "brand": "Apple",
+    "price": 169900,
+    "rating": 4.9,
+    "description": "Professional laptop with M3 chip and Liquid Retina XDR display",
+    "image": "https://via.placeholder.com/300x200?text=MacBook+Pro+14"
+  },
+  {
+    "id": 7,
+    "name": "Dell XPS 15",
+    "category": "laptops",
+    "brand": "Dell",
+    "price": 124999,
+    "rating": 4.7,
+    "description": "Premium Windows laptop with OLED display",
+    "image": "https://via.placeholder.com/300x200?text=Dell+XPS+15"
+  },
+  {
+    "id": 8,
+    "name": "HP Pavilion Gaming",
+    "category": "laptops",
+    "brand": "HP",
+    "price": 64999,
+    "rating": 4.4,
+    "description": "Gaming laptop with RTX 4050 graphics",
+    "image": "https://via.placeholder.com/300x200?text=HP+Pavilion"
+  },
+  {
+    "id": 9,
+    "name": "Lenovo ThinkPad X1 Carbon",
+    "category": "laptops",
+    "brand": "Lenovo",
+    "price": 139999,
+    "rating": 4.8,
+    "description": "Business ultrabook with legendary keyboard",
+    "image": "https://via.placeholder.com/300x200?text=ThinkPad+X1"
+  },
+  {
+    "id": 10,
+    "name": "ASUS ROG Zephyrus G14",
+    "category": "laptops",
+    "brand": "ASUS",
+    "price": 109999,
+    "rating": 4.6,
+    "description": "Compact gaming powerhouse with AMD Ryzen",
+    "image": "https://via.placeholder.com/300x200?text=ROG+Zephyrus"
+  },
+  {
+    "id": 11,
+    "name": "Sony WH-1000XM5",
+    "category": "earphones",
+    "brand": "Sony",
+    "price": 29990,
+    "rating": 4.9,
+    "description": "Industry-leading noise cancelling headphones",
+    "image": "https://via.placeholder.com/300x200?text=Sony+WH-1000XM5"
+  },
+  {
+    "id": 12,
+    "name": "AirPods Pro (2nd Gen)",
+    "category": "earphones",
+    "brand": "Apple",
+    "price": 24900,
+    "rating": 4.8,
+    "description": "Premium wireless earbuds with spatial audio",
+    "image": "https://via.placeholder.com/300x200?text=AirPods+Pro"
+  },
+  {
+    "id": 13,
+    "name": "Samsung Galaxy Buds2 Pro",
+    "category": "earphones",
+    "brand": "Samsung",
+    "price": 14999,
+    "rating": 4.5,
+    "description": "True wireless earbuds with intelligent ANC",
+    "image": "https://via.placeholder.com/300x200?text=Galaxy+Buds2"
+  },
+  {
+    "id": 14,
+    "name": "Bose QuietComfort Ultra",
+    "category": "earphones",
+    "brand": "Bose",
+    "price": 26900,
+    "rating": 4.7,
+    "description": "Premium comfort with world-class noise cancellation",
+    "image": "https://via.placeholder.com/300x200?text=Bose+QC+Ultra"
+  },
+  {
+    "id": 15,
+    "name": "JBL Tune 760NC",
+    "category": "earphones",
+    "brand": "JBL",
+    "price": 5999,
+    "rating": 4.3,
+    "description": "Budget-friendly wireless headphones with ANC",
+    "image": "https://via.placeholder.com/300x200?text=JBL+Tune+760NC"
+  },
+  {
+    "id": 16,
+    "name": "Samsung 65 Neo QLED 4K",
+    "category": "tvs",
+    "brand": "Samsung",
+    "price": 149990,
+    "rating": 4.8,
+    "description": "Premium 4K TV with Quantum HDR and gaming features",
+    "image": "https://via.placeholder.com/300x200?text=Samsung+Neo+QLED"
+  },
+  {
+    "id": 17,
+    "name": "LG 55 OLED C3",
+    "category": "tvs",
+    "brand": "LG",
+    "price": 124990,
+    "rating": 4.9,
+    "description": "OLED TV with perfect blacks and gaming optimization",
+    "image": "https://via.placeholder.com/300x200?text=LG+OLED+C3"
+  },
+  {
+    "id": 18,
+    "name": "Sony Bravia X90L 55",
+    "category": "tvs",
+    "brand": "Sony",
+    "price": 109990,
+    "rating": 4.7,
+    "description": "Full Array LED TV with Cognitive Processor XR",
+    "image": "https://via.placeholder.com/300x200?text=Sony+Bravia"
+  },
+  {
+    "id": 19,
+    "name": "TCL 43 4K UHD",
+    "category": "tvs",
+    "brand": "TCL",
+    "price": 29990,
+    "rating": 4.3,
+    "description": "Budget-friendly 4K TV with HDR support",
+    "image": "https://via.placeholder.com/300x200?text=TCL+4K+UHD"
+  },
+  {
+    "id": 20,
+    "name": "Mi TV 5X 50",
+    "category": "tvs",
+    "brand": "Xiaomi",
+    "price": 39990,
+    "rating": 4.5,
+    "description": "Smart TV with Dolby Vision and Android TV",
+    "image": "https://via.placeholder.com/300x200?text=Mi+TV+5X"
+  },
+  {
+    "id": 21,
+    "name": "Realme Buds Air 3",
+    "category": "earphones",
+    "brand": "Realme",
+    "price": 3999,
+    "rating": 4.2,
+    "description": "Affordable TWS earbuds with good battery life",
+    "image": "https://via.placeholder.com/300x200?text=Realme+Buds"
+  },
+  {
+    "id": 22,
+    "name": "Acer Aspire 5",
+    "category": "laptops",
+    "brand": "Acer",
+    "price": 45999,
+    "rating": 4.3,
+    "description": "All-rounder laptop for students and professionals",
+    "image": "https://via.placeholder.com/300x200?text=Acer+Aspire+5"
+  }
+]

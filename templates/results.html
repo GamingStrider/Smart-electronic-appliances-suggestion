@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Smart Electronics</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <i class="bi bi-lightning-charge-fill"></i> Smart Electronics
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('add_product') }}">Add Product</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="bg-light py-4">
+        <div class="container">
+            <form action="{{ url_for('search') }}" method="POST">
+                <div class="input-group">
+                    <input type="text" class="form-control" 
+                           name="search_query" 
+                           placeholder="Search for electronics..."
+                           value="{{ search_query }}"
+                           aria-label="Search products">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="container my-5">
+        <!-- Results Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2>
+                    {% if category %}
+                        {{ category.title() }} 
+                    {% elif search_query %}
+                        Results for "{{ search_query }}"
+                    {% else %}
+                        All Products
+                    {% endif %}
+                </h2>
+                <p class="text-muted">Found {{ total_results }} product{% if total_results != 1 %}s{% endif %}</p>
+            </div>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-house"></i> Back to Home
+            </a>
+        </div>
+
+        <!-- Products Grid -->
+        {% if products %}
+        <div class="row g-4">
+            {% for product in products %}
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="card product-card h-100">
+                    <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <span class="badge bg-info text-dark mb-2">{{ product.category.title() }}</span>
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text text-muted">{{ product.brand }}</p>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="price">₹{{ "{:,}".format(product.price) }}</span>
+                            <span class="rating">
+                                <i class="bi bi-star-fill text-warning"></i> {{ product.rating }}
+                            </span>
+                        </div>
+                        <p class="card-text small">{{ product.description }}</p>
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-primary w-100">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <!-- No Results Found -->
+        <div class="text-center py-5">
+            <i class="bi bi-inbox display-1 text-muted"></i>
+            <h3 class="mt-3">No products found</h3>
+            <p class="text-muted">Try adjusting your search or browse our categories</p>
+            <div class="mt-4">
+                <a href="{{ url_for('category', category_name='mobiles') }}" class="btn btn-primary m-2">
+                    <i class="bi bi-phone"></i> Mobiles
+                </a>
+                <a href="{{ url_for('category', category_name='laptops') }}" class="btn btn-primary m-2">
+                    <i class="bi bi-laptop"></i> Laptops
+                </a>
+                <a href="{{ url_for('category', category_name='earphones') }}" class="btn btn-primary m-2">
+                    <i class="bi bi-earbuds"></i> Earphones
+                </a>
+                <a href="{{ url_for('category', category_name='tvs') }}" class="btn btn-primary m-2">
+                    <i class="bi bi-tv"></i> TVs
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Recommendations Section (if available) -->
+        {% if show_recommendations and recommendations %}
+        <section class="mt-5">
+            <h3 class="mb-4">You May Also Like</h3>
+            <div class="row g-4">
+                {% for product in recommendations %}
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="card product-card h-100">
+                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <span class="badge bg-success mb-2">Recommended</span>
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text text-muted">{{ product.brand }}</p>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="price">₹{{ "{:,}".format(product.price) }}</span>
+                                <span class="rating">
+                                    <i class="bi bi-star-fill text-warning"></i> {{ product.rating }}
+                                </span>
+                            </div>
+                            <p class="card-text small">{{ product.description[:60] }}...</p>
+                            <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-outline-primary w-100">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Smart Electronics. A B.Tech Project by Student.</p>
+            <p class="small mb-0">Built with Flask & Bootstrap</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
